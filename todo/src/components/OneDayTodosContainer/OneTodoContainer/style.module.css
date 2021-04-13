@@ -1,0 +1,8 @@
+.one_todo {
+  width: 150px;
+  height: 40px;
+  padding: 10px;
+  line-height: 40px;
+  border: 1px solid black;
+  margin-top: 10px;
+}

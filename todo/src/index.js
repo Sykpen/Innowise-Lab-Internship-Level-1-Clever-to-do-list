@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
 import App from "./components/MainAppComponent";
-import rootReducer from "./reducers/rootReduser";
+import { rootReducer } from "./reducers/rootReduser";
 
 const store = createStore(
   rootReducer,
