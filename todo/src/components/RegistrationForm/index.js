@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+import { registerUser } from "../../actions/authorization";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,8 +31,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RegistrationForm() {
+const RegistrationForm = () => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleEmailChange = ({ target }) => {
+    setEmail(target.value);
+  };
+  const handlePasswordChange = ({ target }) => {
+    setPassword(target.value);
+  };
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    dispatch(registerUser(email, password));
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -38,7 +58,7 @@ export default function RegistrationForm() {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleFormSubmit} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -49,6 +69,7 @@ export default function RegistrationForm() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleEmailChange}
           />
           <TextField
             variant="outlined"
@@ -60,6 +81,7 @@ export default function RegistrationForm() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handlePasswordChange}
           />
           <Button
             type="submit"
@@ -81,4 +103,6 @@ export default function RegistrationForm() {
       </div>
     </Container>
   );
-}
+};
+
+export default RegistrationForm;

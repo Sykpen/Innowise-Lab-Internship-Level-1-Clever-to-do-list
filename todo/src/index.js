@@ -8,6 +8,8 @@ import thunkMiddleware from "redux-thunk";
 import App from "./components/MainAppComponent";
 import { rootReducer } from "./reducers/rootReduser";
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunkMiddleware))
