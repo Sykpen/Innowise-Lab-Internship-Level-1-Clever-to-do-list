@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Link as RouterLink } from "react-router-dom";
+import {ToastContainer} from 'react-toastify'
+import {useDispatch} from 'react-redux'
+import {UserLogin} from '../../actions/authorization'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,14 +36,32 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginForm() {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleEmailChange = ({ target }) => {
+    setEmail(target.value);
+  };
+  const handlePasswordChange = ({ target }) => {
+    setPassword(target.value);
+  };
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    dispatch(UserLogin(email, password));
+  }
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs"> 
+      <ToastContainer/>
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -49,6 +71,7 @@ export default function LoginForm() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            onChange={handleEmailChange}
             autoFocus
           />
           <TextField
@@ -61,6 +84,7 @@ export default function LoginForm() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handlePasswordChange}
           />
           <Button
             type="submit"
@@ -74,7 +98,7 @@ export default function LoginForm() {
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                <RouterLink to="/register">Don't have an account? Register</RouterLink>
               </Link>
             </Grid>
           </Grid>

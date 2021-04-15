@@ -8,8 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { registerUser } from "../../actions/authorization";
-import { useDispatch } from "react-redux";
+import { newRegister } from "../../actions/authorization";
+import { useDispatch, useSelector } from "react-redux";
+import { Link as RouterLink, useHistory } from "react-router-dom";
+import {ToastContainer} from 'react-toastify'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +37,7 @@ const RegistrationForm = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -46,13 +49,23 @@ const RegistrationForm = () => {
     setPassword(target.value);
   };
 
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
-    dispatch(registerUser(email, password));
+    try {
+      await dispatch(newRegister(email, password));
+      history.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+    // dispatch(newRegister(email, password));
   }
+
+  const userEmail = useSelector((state) => state.authorization.userEmail);
+  console.log(userEmail)
 
   return (
     <Container component="main" maxWidth="xs">
+                <ToastContainer />
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -95,7 +108,7 @@ const RegistrationForm = () => {
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Have an account? Sign In"}
+                <RouterLink to="/login">Have an account? Login</RouterLink>
               </Link>
             </Grid>
           </Grid>

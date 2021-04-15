@@ -1,20 +1,38 @@
-import { REGISTER_USER } from "../constants";
+import { REGISTER_USER, LOGIN_USER, REGISTER_ERROR } from "../constants";
 import { auth } from "../firebase";
-import { toast } from "react-toastify";
 
-export const registerUser = (email, password) => {
-    console.log(email, password)
-    return {
-        type: REGISTER_USER,
-        email: email
-    }   
-//   auth
-//     .createUserWithEmailAndPassword(email, password)
-//     .then(() => {
-//       toast.success("Registration was succesessfull");
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       toast.error("Registration wasn't succesessfull");
-//     });
+export const register = (email) => ({ type: REGISTER_USER, email });
+export const registerError = (error) => ({ type: REGISTER_ERROR, error });
+export const loginUser = (email) => ({ type: LOGIN_USER, email });
+
+export const newRegister = (email, password) => async (dispatch) => {
+  try {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => dispatch(register(email)));
+  } catch (error) {
+    dispatch(registerError(error.message));
+  }
 };
+
+export const UserLogin = (email, password) => async (dispatch) => {
+  try {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => dispatch(loginUser(email)));
+  } catch (error) {console.log(error)}
+};
+
+// export const RegisterUser = (email, password) => {
+//   return (dispatch) => {
+//     console.log("слой 2");
+//     auth
+//       .createUserWithEmailAndPassword(email, password)
+//       .then(() => {
+//         dispatch(register(email));
+//       })
+//       .catch((err) => {
+//         dispatch(register(err));
+//       });
+//   };
+// };
