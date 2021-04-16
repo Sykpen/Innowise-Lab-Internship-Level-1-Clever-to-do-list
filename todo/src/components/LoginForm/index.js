@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,11 +7,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link as RouterLink } from "react-router-dom";
-import {ToastContainer} from 'react-toastify'
-import {useDispatch} from 'react-redux'
-import {UserLogin} from '../../actions/authorization'
-
+import { Link as RouterLink, Redirect } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { loginError, loginUser } from "../../actions/authorization";
+import { auth } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,6 +41,8 @@ export default function LoginForm() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const [isLoginSuccesessfull, setIsLoginSuccesessfull] = useState();
+
   const handleEmailChange = ({ target }) => {
     setEmail(target.value);
   };
@@ -48,14 +50,21 @@ export default function LoginForm() {
     setPassword(target.value);
   };
 
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
-    dispatch(UserLogin(email, password));
+    try {
+    const userCreads = await auth.signInWithEmailAndPassword(email, password);
+    dispatch(loginUser(userCreads.user.uid, userCreads.user.email));
+    setIsLoginSuccesessfull(true);      
+    } catch (error) {
+      dispatch(loginError(error.message))
+    }
+
   }
 
   return (
-    <Container component="main" maxWidth="xs"> 
-      <ToastContainer/>
+    <Container component="main" maxWidth="xs">
+      <ToastContainer />
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -98,11 +107,14 @@ export default function LoginForm() {
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2">
-                <RouterLink to="/register">Don't have an account? Register</RouterLink>
+                <RouterLink to="/register">
+                  Don't have an account? Register
+                </RouterLink>
               </Link>
             </Grid>
           </Grid>
         </form>
+        {isLoginSuccesessfull ? <Redirect to="/"></Redirect> : null}
       </div>
     </Container>
   );

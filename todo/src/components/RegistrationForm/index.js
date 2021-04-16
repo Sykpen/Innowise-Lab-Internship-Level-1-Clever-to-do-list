@@ -8,10 +8,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { newRegister } from "../../actions/authorization";
-import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink, useHistory } from "react-router-dom";
-import {ToastContainer} from 'react-toastify'
+import { register, registerError } from "../../actions/authorization";
+import { useDispatch } from "react-redux";
+import { Link as RouterLink, Redirect } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import {auth} from '../../firebase'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,10 +38,11 @@ const RegistrationForm = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const [userSuccessesfullyRegistred, setuserSuccessesfullyRegistred] = useState(false);
 
   const handleEmailChange = ({ target }) => {
     setEmail(target.value);
@@ -52,20 +54,17 @@ const RegistrationForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-      await dispatch(newRegister(email, password));
-      history.push('/')
+      const userCreds = await auth.createUserWithEmailAndPassword(email, password);
+      dispatch(register(userCreds.user.uid, userCreds.user.email));
+      setuserSuccessesfullyRegistred(true);
     } catch (error) {
-      console.log(error)
+      dispatch(registerError(error.message));
     }
-    // dispatch(newRegister(email, password));
   }
-
-  const userEmail = useSelector((state) => state.authorization.userEmail);
-  console.log(userEmail)
 
   return (
     <Container component="main" maxWidth="xs">
-                <ToastContainer />
+      <ToastContainer />
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -114,6 +113,7 @@ const RegistrationForm = () => {
           </Grid>
         </form>
       </div>
+      {userSuccessesfullyRegistred ? <Redirect to="/"></Redirect> : null}
     </Container>
   );
 };
