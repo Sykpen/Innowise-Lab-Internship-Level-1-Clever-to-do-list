@@ -1,30 +1,24 @@
 import styles from "./style.module.css";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+
 import { addNewTodo } from "../../actions";
 import OneTodoContainer from "./OneTodoContainer";
 
-const OneDayTodosContainer = ({ data, addNewTodo }) => {
+const OneDayTodosContainer = () => {
+  const oneDayData = useSelector(state => state.data.oneDayData);
+
+  const dispatch = useDispatch();
   return (
     <div>
       <div className={styles.todos_container}>
-        {data.map((oneTask) => (
+        {oneDayData.map((oneTask) => (
           <OneTodoContainer todoText={oneTask.title} />
         ))}
       </div>
-      <button onClick={() => addNewTodo()}>Add new task</button>
+      <button onClick={() => dispatch(addNewTodo())}>Add new task</button>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  data: state.data.oneDayData,
-});
-
-const mapDispatchToProps = {
-  addNewTodo,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OneDayTodosContainer);
+export default OneDayTodosContainer;
