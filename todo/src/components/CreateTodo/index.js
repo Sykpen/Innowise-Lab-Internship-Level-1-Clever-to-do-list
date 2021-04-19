@@ -46,7 +46,7 @@ const CreateTodoForm = () => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState();
 
-  const userId = useSelector(state => state.authorization.userId)
+  const userId = useSelector((state) => state.authorization.userId);
 
   const handleTitleChange = ({ target }) => {
     setTitle(target.value);
@@ -63,8 +63,8 @@ const CreateTodoForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     const todo = { title, description, date };
-    const todoRef = Firebase.database().ref(`${userId}/${date}`)
-    todoRef.push(todo)
+    const todoRef = Firebase.database().ref(`${userId}/${date}`);
+    todoRef.push(todo);
     dispatch(addNewTodo(todo));
   }
 
