@@ -1,15 +1,17 @@
-import { ADD_NEW_TODO } from "../constants";
+import { ADD_NEW_TODO, FETCH_DATA_FOR_CURRENT_USER } from "../constants";
+import moment from 'moment'
 
 const initialState = {
-  oneDayData: [{title: 'Task 1'}, {title: 'Task 2'}, {title: 'Task 3'}],
+  currentUserData: [],
+  currentPickedData: moment().format("YYYY-MM-DD")
 };
 
 export const DataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_NEW_TODO:
+    case FETCH_DATA_FOR_CURRENT_USER:
       return {
         ...state,
-        oneDayData: [...state.oneDayData, ...[{title: "Новая тудушка"}]],
+        currentUserData: action.currentUserData,
       };
     default:
       return state;

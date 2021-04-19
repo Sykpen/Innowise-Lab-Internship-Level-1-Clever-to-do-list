@@ -12,7 +12,7 @@ import { register, registerError } from "../../actions/authorization";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import {auth} from '../../firebase'
+import { auth } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,7 +42,10 @@ const RegistrationForm = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const [userSuccessesfullyRegistred, setuserSuccessesfullyRegistred] = useState(false);
+  const [
+    userSuccessesfullyRegistred,
+    setuserSuccessesfullyRegistred,
+  ] = useState(false);
 
   const handleEmailChange = ({ target }) => {
     setEmail(target.value);
@@ -54,7 +57,10 @@ const RegistrationForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-      const userCreds = await auth.createUserWithEmailAndPassword(email, password);
+      const userCreds = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
       dispatch(register(userCreds.user.uid, userCreds.user.email));
       setuserSuccessesfullyRegistred(true);
     } catch (error) {
@@ -106,9 +112,11 @@ const RegistrationForm = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                <RouterLink to="/login">Have an account? Login</RouterLink>
-              </Link>
+              <RouterLink to="/login">
+                <Link href="#" variant="body2">
+                  Have an account? Login
+                </Link>
+              </RouterLink>
             </Grid>
           </Grid>
         </form>

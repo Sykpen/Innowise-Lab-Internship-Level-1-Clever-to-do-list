@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
+import Firebase from "./firebase";
 
 import App from "./components/MainAppComponent";
 import { rootReducer } from "./reducers/rootReduser";
@@ -19,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import { auth } from "./firebase";
 
 import { loginUser } from "./actions/authorization";
+import { setCurrentUserData } from "./actions/data";
 
 const store = createStore(
   rootReducer,
@@ -26,7 +28,14 @@ const store = createStore(
 );
 
 auth.onAuthStateChanged((user) => {
-  user ? store.dispatch(loginUser(user.uid, user.email)) : null
+  if (user) {
+    store.dispatch(loginUser(user.uid, user.email));
+    Firebase.database()
+      .ref(`${user.uid}`)
+      .on("value", (snapshot) => {
+        store.dispatch(setCurrentUserData(snapshot.val()))
+      });
+  }
   ReactDOM.render(
     <Provider store={store}>
       <React.StrictMode>
@@ -42,4 +51,4 @@ auth.onAuthStateChanged((user) => {
     </Provider>,
     document.getElementById("root")
   );
-}); 
+});

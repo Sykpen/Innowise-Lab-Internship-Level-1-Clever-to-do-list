@@ -1,22 +1,40 @@
 import styles from "./style.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-
-import { addNewTodo } from "../../actions";
 import OneTodoContainer from "./OneTodoContainer";
+import { useEffect, useState } from "react";
 
 const OneDayTodosContainer = () => {
-  const oneDayData = useSelector(state => state.data.oneDayData);
+  const [todoList, setTodoList] = useState();
 
-  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.data.currentUserData);
+
+  const currentPickedData = useSelector(
+    (state) => state.data.currentPickedData
+  );
+
+  const dataForChosenDay = userData[currentPickedData];
+
+  useEffect(() => {
+    const list = [];
+    if (dataForChosenDay) {
+    for (const [key, value] of 
+      Object.entries(dataForChosenDay)) {
+      let newObj = { key, ...value };
+      list.push(newObj);
+    }
+    setTodoList(list);      
+    }
+  }, [dataForChosenDay]);
+
   return (
     <div>
       <div className={styles.todos_container}>
-        {oneDayData.map((oneTask) => (
-          <OneTodoContainer todoText={oneTask.title} />
-        ))}
+        {todoList &&
+          todoList.map((oneTask) => (
+            <OneTodoContainer todoText={oneTask.title} />
+          ))}
       </div>
-      <button onClick={() => dispatch(addNewTodo())}>Add new task</button>
     </div>
   );
 };
