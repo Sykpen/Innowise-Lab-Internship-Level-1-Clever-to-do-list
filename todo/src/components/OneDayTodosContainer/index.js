@@ -18,22 +18,26 @@ const OneDayTodosContainer = () => {
   useEffect(() => {
     const list = [];
     if (dataForChosenDay) {
-    for (const [key, value] of 
-      Object.entries(dataForChosenDay)) {
-      let newObj = { key, ...value };
-      list.push(newObj);
-    }
-    setTodoList(list);      
+      for (const [key, value] of Object.entries(dataForChosenDay)) {
+        let newObj = { key, ...value };
+        list.push(newObj);
+      }
+      setTodoList(list);
+    } else {
+      setTodoList(null);
     }
   }, [dataForChosenDay]);
 
   return (
     <div>
       <div className={styles.todos_container}>
-        {todoList &&
+        {todoList ? (
           todoList.map((oneTask) => (
             <OneTodoContainer todoText={oneTask.title} />
-          ))}
+          ))
+        ) : (
+          <div>No Todo's for today, go create one!</div>
+        )}
       </div>
     </div>
   );

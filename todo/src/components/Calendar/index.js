@@ -15,6 +15,7 @@ const Calendar = () => {
         dayNumber: i,
         month: currentMonth,
         dayOfWeek: moment(`2021-${currentMonth}-${i}`).format("dddd"),
+        date: moment(`2021-${currentMonth}-${i}`).format("YYYY-MM-DD"),
       });
       if (i === moment().daysInMonth()) {
         for (let i = 1; i <= moment().date(); i++) {
@@ -22,10 +23,12 @@ const Calendar = () => {
             dayNumber: i,
             month: currentMonth + 1,
             dayOfWeek: moment(`2021-${currentMonth}-${i}`).format("dddd"),
+            date: moment(`2021-${currentMonth + 1}-${i}`).format("YYYY-MM-DD"),
           });
         }
       }
     }
+    console.log(result);
     return result;
   };
 
@@ -37,6 +40,7 @@ const Calendar = () => {
         <CalendarOneDayContainer
           day={day.dayNumber}
           dayOfWeek={day.dayOfWeek}
+          date={day.date}
         />
       ))}
     </div>
