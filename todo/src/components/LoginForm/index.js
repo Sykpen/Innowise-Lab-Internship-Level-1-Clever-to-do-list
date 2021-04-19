@@ -53,13 +53,12 @@ export default function LoginForm() {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-    const userCreads = await auth.signInWithEmailAndPassword(email, password);
-    dispatch(loginUser(userCreads.user.uid, userCreads.user.email));
-    setIsLoginSuccesessfull(true);      
+      const userCreads = await auth.signInWithEmailAndPassword(email, password);
+      dispatch(loginUser(userCreads.user.uid, userCreads.user.email));
+      setIsLoginSuccesessfull(true);
     } catch (error) {
-      dispatch(loginError(error.message))
+      dispatch(loginError(error.message));
     }
-
   }
 
   return (
@@ -106,11 +105,11 @@ export default function LoginForm() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                <RouterLink to="/register">
+              <RouterLink to="/register">
+                <Link href="#" variant="body2">
                   Don't have an account? Register
-                </RouterLink>
-              </Link>
+                </Link>
+              </RouterLink>
             </Grid>
           </Grid>
         </form>
