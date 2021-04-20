@@ -21,6 +21,8 @@ import { auth } from "./firebase";
 
 import { loginUser } from "./actions/authorization";
 import { setCurrentUserData } from "./actions/data";
+import CreateTodoForm from "./components/CreateTodo";
+import UpdateTodoForm from "./components/UpdateTodo";
 
 const store = createStore(
   rootReducer,
@@ -44,6 +46,8 @@ auth.onAuthStateChanged((user) => {
             <PrivateRoute exact path="/" component={App}></PrivateRoute>
             <Route path="/register" component={RegistrationForm}></Route>
             <Route path="/login" component={LoginForm}></Route>
+            <Route path="/new" component={CreateTodoForm}></Route>
+            <Route path="/update" component={UpdateTodoForm}></Route>
             <ToastContainer />
           </Switch>
         </Router>

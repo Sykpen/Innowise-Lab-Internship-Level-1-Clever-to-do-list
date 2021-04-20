@@ -13,7 +13,7 @@ const OneDayTodosContainer = () => {
     (state) => state.data.currentPickedData
   );
 
-  const dataForChosenDay = userData[currentPickedData];
+  const dataForChosenDay = userData ? userData[currentPickedData] : null;
 
   useEffect(() => {
     const list = [];
@@ -32,9 +32,7 @@ const OneDayTodosContainer = () => {
     <div>
       <div className={styles.todos_container}>
         {todoList ? (
-          todoList.map((oneTask) => (
-            <OneTodoContainer todoText={oneTask.title} />
-          ))
+          todoList.map((oneTask) => <OneTodoContainer todoInfo={oneTask} />)
         ) : (
           <div>No Todo's for today, go create one!</div>
         )}

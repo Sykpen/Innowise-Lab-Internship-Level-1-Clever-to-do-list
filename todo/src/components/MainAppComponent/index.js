@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../firebase";
 
 import { logoutUser } from "../../actions/authorization";
-import CreateTodoForm from "../CreateTodo";
+import { Link } from "react-router-dom";
 
 const App = () => {
   const userEmail = useSelector(
@@ -25,7 +25,9 @@ const App = () => {
       <p>Welcome: {userEmail}</p>
       <Calendar />
       <OneDayTodosContainer />
-      <CreateTodoForm />
+      <Link to="/new">
+        <button>Create new Todo</button>
+      </Link>
       <button onClick={handleLogout}>LogOut</button>
     </div>
   );
