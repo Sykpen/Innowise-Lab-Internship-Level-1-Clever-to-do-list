@@ -64,7 +64,7 @@ const CreateTodoForm = () => {
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-    const todo = { title, description, date };
+    const todo = { title, description, date, isDone: false };
     const todoRef = Firebase.database().ref(`${userId}/${date}`);
     todoRef.push(todo);
     dispatch(addNewTodo(todo));

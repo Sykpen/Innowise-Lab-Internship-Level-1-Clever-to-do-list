@@ -46,8 +46,6 @@ const UpdateTodoForm = () => {
   const pickedTodoDate = useSelector((state) => state.data.pickedTodoDate);
   const pickedTodoId = useSelector((state) => state.data.pickedTodoId)
 
-  console.log(pickedTodoId)
-
   const [title, setTitle] = useState(pickedTodoTitle);
   const [description, setDescription] = useState(pickedTodoDescription);
   const [date, setDate] = useState(pickedTodoDate);
