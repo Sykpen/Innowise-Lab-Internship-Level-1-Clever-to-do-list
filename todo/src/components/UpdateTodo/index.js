@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -6,13 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import { useState } from "react";
 
 import { Firebase } from "../../firebase";
-
-import { addNewTodo } from "../../actions/data";
-import { Link as RouterLink, } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,14 +36,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateTodoForm = () => {
+const UpdateTodoForm = () => {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
+  const pickedTodoTitle = useSelector((state) => state.data.pickedTodoTitle);
+  const pickedTodoDescription = useSelector(
+    (state) => state.data.pickedTodoDescription
+  );
+  const pickedTodoDate = useSelector((state) => state.data.pickedTodoDate);
+  const pickedTodoId = useSelector((state) => state.data.pickedTodoId)
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState(useSelector((state) => state.data.currentPickedData));
+  console.log(pickedTodoId)
+
+  const [title, setTitle] = useState(pickedTodoTitle);
+  const [description, setDescription] = useState(pickedTodoDescription);
+  const [date, setDate] = useState(pickedTodoDate);
+  
 
   const userId = useSelector((state) => state.authorization.userId);
 
@@ -66,11 +71,10 @@ const CreateTodoForm = () => {
     e.preventDefault();
     const todo = { title, description, date };
     const todoRef = Firebase.database().ref(`${userId}/${date}`);
-    todoRef.push(todo);
-    dispatch(addNewTodo(todo));
-    setTitle('');
-    setDescription('');
-    setDate('');
+    todoRef.child(`${pickedTodoId}`).update(todo);
+    setTitle("");
+    setDescription("");
+    setDate("");
   }
 
   return (
@@ -78,7 +82,7 @@ const CreateTodoForm = () => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Create new ToDo
+          ToDo
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
           <TextField
@@ -108,7 +112,7 @@ const CreateTodoForm = () => {
           />
           <TextField
             id="date"
-            label="Select Date"
+            label="Selected Date"
             type="date"
             value={date}
             className={classes.textField}
@@ -116,23 +120,20 @@ const CreateTodoForm = () => {
               shrink: true,
             }}
             onChange={handleDateChange}
+            disabled={true}
           />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Create ToDo
-            </Button>
-            <Grid container>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Update ToDo
+          </Button>
+          <Grid container>
             <Grid item>
-              <RouterLink to="/">
-                <Link href="#" variant="body2">
-                  Go back to main page
-                </Link>
-              </RouterLink>
+              <RouterLink to="/">Go back to main page</RouterLink>
             </Grid>
           </Grid>
         </form>
@@ -141,4 +142,4 @@ const CreateTodoForm = () => {
   );
 };
 
-export default CreateTodoForm;
+export default UpdateTodoForm;

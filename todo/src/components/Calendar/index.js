@@ -28,7 +28,6 @@ const Calendar = () => {
         }
       }
     }
-    console.log(result);
     return result;
   };
 

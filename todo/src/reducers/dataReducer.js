@@ -1,13 +1,17 @@
 import {
-  ADD_NEW_TODO,
   FETCH_DATA_FOR_CURRENT_USER,
   SET_NEW_DATE,
+  SET_PICKED_TODO_INFO,
 } from "../constants";
 import moment from "moment";
 
 const initialState = {
   currentUserData: [],
   currentPickedData: moment().format("YYYY-MM-DD"),
+  pickedTodoTitle: "",
+  pickedTodoDescription: "",
+  pickedTodoDate: "",
+  pickedTodoId: "",
 };
 
 export const DataReducer = (state = initialState, action) => {
@@ -21,6 +25,14 @@ export const DataReducer = (state = initialState, action) => {
       return {
         ...state,
         currentPickedData: action.newDate,
+      };
+    case SET_PICKED_TODO_INFO:
+      return {
+        ...state,
+        pickedTodoTitle: action.title,
+        pickedTodoDescription: action.description,
+        pickedTodoDate: action.date,
+        pickedTodoId: action.id,
       };
     default:
       return state;
