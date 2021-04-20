@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Firebase } from "../../firebase";
 
 import { addNewTodo } from "../../actions/data";
-import { Link as RouterLink, } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,10 +43,11 @@ const CreateTodoForm = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const todayDate = useSelector((state) => state.data.currentPickedData);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState(useSelector((state) => state.data.currentPickedData));
+  const [date, setDate] = useState(todayDate);
 
   const userId = useSelector((state) => state.authorization.userId);
 
@@ -68,9 +69,9 @@ const CreateTodoForm = () => {
     const todoRef = Firebase.database().ref(`${userId}/${date}`);
     todoRef.push(todo);
     dispatch(addNewTodo(todo));
-    setTitle('');
-    setDescription('');
-    setDate('');
+    setTitle("");
+    setDescription("");
+    setDate(todayDate);
   }
 
   return (
@@ -117,22 +118,18 @@ const CreateTodoForm = () => {
             }}
             onChange={handleDateChange}
           />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Create ToDo
-            </Button>
-            <Grid container>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Create ToDo
+          </Button>
+          <Grid container>
             <Grid item>
-              <RouterLink to="/">
-                <Link href="#" variant="body2">
-                  Go back to main page
-                </Link>
-              </RouterLink>
+              <RouterLink to="/">Go back to main page</RouterLink>
             </Grid>
           </Grid>
         </form>
