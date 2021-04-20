@@ -7,3 +7,24 @@
   margin-right: 20px;
   cursor: pointer;
 }
+
+.done_todos {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.undone_todos {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.dots_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: -10px;
+}

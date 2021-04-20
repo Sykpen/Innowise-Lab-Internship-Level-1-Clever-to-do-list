@@ -32,9 +32,6 @@ const OneDayTodosContainer = () => {
     }
   }, [dataForChosenDay]);
 
-  console.log(todoList);
-  console.log(doneTodos);
-
   return (
     <div>
       <div className={styles.todos_container}>
