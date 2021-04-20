@@ -22,7 +22,6 @@ export const AuthorizationReducer = (state = initialState, action) => {
         currentUserEmail: action.email,
       };
     case LOGIN_USER:
-      toast.success("Login was succesessfull");
       return {
         ...state,
         currentUserEmail: action.email,
