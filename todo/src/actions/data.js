@@ -20,4 +20,5 @@ export const setPickedTodoInfo = (todoInfo) => ({
   description: todoInfo.description,
   date: todoInfo.date,
   id: todoInfo.key,
+  status: todoInfo.isDone
 });

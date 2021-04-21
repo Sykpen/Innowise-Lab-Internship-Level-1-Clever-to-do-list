@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useState } from "react";
 
 import { Firebase } from "../../firebase";
@@ -44,12 +46,13 @@ const UpdateTodoForm = () => {
     (state) => state.data.pickedTodoDescription
   );
   const pickedTodoDate = useSelector((state) => state.data.pickedTodoDate);
-  const pickedTodoId = useSelector((state) => state.data.pickedTodoId)
+  const pickedTodoId = useSelector((state) => state.data.pickedTodoId);
+  const pickedTodoStatus = useSelector((state) => state.data.pickedTodoStatus)
 
   const [title, setTitle] = useState(pickedTodoTitle);
   const [description, setDescription] = useState(pickedTodoDescription);
   const [date, setDate] = useState(pickedTodoDate);
-  
+  const [status, setStatus] = useState(pickedTodoStatus)
 
   const userId = useSelector((state) => state.authorization.userId);
 
@@ -73,6 +76,15 @@ const UpdateTodoForm = () => {
     setTitle("");
     setDescription("");
     setDate("");
+  }
+
+  const handleCheckboxChange = (e) => {
+    setStatus(!status)
+    const newStatus = {
+      isDone: !status,
+    };
+    const todoRef = Firebase.database().ref(`${userId}/${pickedTodoDate}`);
+    todoRef.child(`${pickedTodoId}`).update(newStatus);
   }
 
   return (
@@ -119,6 +131,15 @@ const UpdateTodoForm = () => {
             }}
             onChange={handleDateChange}
             disabled={true}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+              checked={status}
+              onChange={handleCheckboxChange}
+              />
+            }
+            label={"Complete"}
           />
           <Button
             type="submit"

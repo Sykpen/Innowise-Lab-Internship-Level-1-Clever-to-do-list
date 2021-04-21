@@ -8,8 +8,6 @@ const Calendar = () => {
   let [currentMonth, setCurrentMonth] = useState(moment().month() + 1);
   let [currentYear, setCurrentYear] = useState(moment().year());
 
-  console.log(currentYear);
-
   const fulfillArrayOfDAys = (arr, newMonth, year) => {
     let i = currentAndFinalDay;
     for (i; i <= moment().daysInMonth(); i++) {
@@ -66,13 +64,13 @@ const Calendar = () => {
 
   return (
     <div className={styles.calendar_container} onScroll={handleScrollEvent}>
-      {daysArray.map((day) => (
-        <CalendarOneDayContainer
-          day={day.dayNumber}
-          dayOfWeek={day.dayOfWeek}
-          date={day.date}
-        />
-      ))}
+        {daysArray.map((day) => (
+          <CalendarOneDayContainer
+            day={day.dayNumber}
+            dayOfWeek={day.dayOfWeek}
+            date={day.date}
+          />
+        ))}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import styles from "./style.module.css";
+import Button from "@material-ui/core/Button";
 
 import OneDayTodosContainer from "../OneDayTodosContainer";
 import Calendar from "../Calendar";
@@ -21,14 +22,30 @@ const App = () => {
   };
 
   return (
-    <div className={styles.test_class}>
-      <p>Welcome: {userEmail}</p>
+    <div className={styles.main_container}>
+      <div className={styles.welcome_user_text_container}>
+        Welcome: {userEmail}
+      </div>
+      
       <Calendar />
       <OneDayTodosContainer />
       <Link to="/new">
-        <button>Create new Todo</button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={styles.create_new}
+        >
+          Create new Todo
+        </Button>
       </Link>
-      <button onClick={handleLogout}>LogOut</button>
+      <Button
+        variant="contained"
+        color="primary"
+        className={styles.logout}
+        onClick={handleLogout}
+      >
+        LogOut
+      </Button>
     </div>
   );
 };
