@@ -25,6 +25,9 @@ import { setCurrentUserData } from "./actions/data";
 import CreateTodoForm from "./components/CreateTodo";
 import UpdateTodoForm from "./components/UpdateTodo";
 
+import './styles/colors.css'
+import './styles/global.css'
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunkMiddleware))

@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setNewDate } from "../../../actions/data";
 import styles from "./style.module.css";
 
-const CalendarOneDayContainer = ({ day, dayOfWeek, date }) => {
+const CalendarOneDayContainer = ({ day, dayOfWeek, date, dayId }) => {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.data.currentUserData);
+
+  const activeDayIndex = useSelector((state) => state.data.activeDayIndex);
+  
 
   const [unDoneTodos, setUnDoneTodos] = useState();
   const [doneTodos, setDoneTodos] = useState();
@@ -28,17 +31,24 @@ const CalendarOneDayContainer = ({ day, dayOfWeek, date }) => {
     }
   }, [dataForChosenDay]);
 
-
   return (
     <div
-      className={styles.one_day_container}
-      onClick={() => dispatch(setNewDate(date))}
+      className={
+        activeDayIndex === dayId
+          ? `${styles.one_day_container} ${styles.active}`
+          : `${styles.one_day_container}`
+      }
+      onClick={() => {dispatch(setNewDate(date, dayId))}}
     >
       <p>{dayOfWeek}</p>
       <p>{day}</p>
       <div className={styles.dots_container}>
-        {unDoneTodos && unDoneTodos.length > 0 ? <div className={styles.undone_todos}></div> : null}
-        {doneTodos && doneTodos.length > 0 ? <div className={styles.done_todos}></div> : null}
+        {unDoneTodos && unDoneTodos.length > 0 ? (
+          <div className={styles.undone_todos}></div>
+        ) : null}
+        {doneTodos && doneTodos.length > 0 ? (
+          <div className={styles.done_todos}></div>
+        ) : null}
       </div>
     </div>
   );
