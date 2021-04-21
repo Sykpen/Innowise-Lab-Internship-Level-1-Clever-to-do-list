@@ -12,6 +12,7 @@ const initialState = {
   pickedTodoDescription: "",
   pickedTodoDate: "",
   pickedTodoId: "",
+  pickedTodoStatus: "",
 };
 
 export const DataReducer = (state = initialState, action) => {
@@ -33,6 +34,7 @@ export const DataReducer = (state = initialState, action) => {
         pickedTodoDescription: action.description,
         pickedTodoDate: action.date,
         pickedTodoId: action.id,
+        pickedTodoStatus: action.status
       };
     default:
       return state;
