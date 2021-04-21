@@ -20,19 +20,19 @@
 }
 
 .welcome_user_text_container {
-    white-space: nowrap;
-    width: 100%;
-    max-width: 350px;
-    height: 40px;
-    line-height: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: bold;
-    font-size: 21px;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 350px;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size: 21px;
 }
 
 @media (max-width: 500px) {
-    .welcome_user_text_container {
-        max-width: 230px;
-    }
+  .welcome_user_text_container {
+    max-width: 230px;
+  }
 }

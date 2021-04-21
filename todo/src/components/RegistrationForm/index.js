@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,7 +11,7 @@ import { register, registerError } from "../../actions/authorization";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { auth } from "../../firebase";
+import { auth } from "../../utils/firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -112,11 +111,7 @@ const RegistrationForm = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <RouterLink to="/login">
-                <Link href="#" variant="body2">
-                  Have an account? Login
-                </Link>
-              </RouterLink>
+              <RouterLink to="/login">Have an account? Login</RouterLink>
             </Grid>
           </Grid>
         </form>

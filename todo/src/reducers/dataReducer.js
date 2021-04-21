@@ -13,7 +13,7 @@ const initialState = {
   pickedTodoDate: "",
   pickedTodoId: "",
   pickedTodoStatus: "",
-  activeDayIndex: 0
+  activeDayIndex: 0,
 };
 
 export const DataReducer = (state = initialState, action) => {
@@ -24,11 +24,10 @@ export const DataReducer = (state = initialState, action) => {
         currentUserData: action.currentUserData,
       };
     case SET_NEW_DATE:
-      console.log(action)
       return {
         ...state,
         currentPickedData: action.newDate,
-        activeDayIndex: action.activeDayIndex
+        activeDayIndex: action.activeDayIndex,
       };
     case SET_PICKED_TODO_INFO:
       return {
@@ -37,7 +36,7 @@ export const DataReducer = (state = initialState, action) => {
         pickedTodoDescription: action.description,
         pickedTodoDate: action.date,
         pickedTodoId: action.id,
-        pickedTodoStatus: action.status
+        pickedTodoStatus: action.status,
       };
     default:
       return state;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,7 +10,7 @@ import { Link as RouterLink, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { loginError, loginUser } from "../../actions/authorization";
-import { auth } from "../../firebase";
+import { auth } from "../../utils/firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -106,9 +105,7 @@ export default function LoginForm() {
           <Grid container>
             <Grid item>
               <RouterLink to="/register">
-                <Link href="#" variant="body2">
-                  Don't have an account? Register
-                </Link>
+                Don't have an account? Register
               </RouterLink>
             </Grid>
           </Grid>

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
-import Firebase from "./firebase";
+import Firebase from "./utils/firebase";
 
 import App from "./components/MainAppComponent";
 import { rootReducer } from "./reducers/rootReduser";
@@ -18,15 +18,15 @@ import PrivateRoute from "./components/PrivateRoute";
 import PrivateRouteForUpdateForm from "./components/PrivateRouteForUpdateForm";
 import { ToastContainer } from "react-toastify";
 
-import { auth } from "./firebase";
+import { auth } from "./utils/firebase";
 
 import { loginUser } from "./actions/authorization";
 import { setCurrentUserData } from "./actions/data";
 import CreateTodoForm from "./components/CreateTodo";
 import UpdateTodoForm from "./components/UpdateTodo";
 
-import './styles/colors.css'
-import './styles/global.css'
+import "./styles/colors.css";
+import "./styles/global.css";
 
 const store = createStore(
   rootReducer,
