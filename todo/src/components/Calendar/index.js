@@ -64,13 +64,14 @@ const Calendar = () => {
 
   return (
     <div className={styles.calendar_container} onScroll={handleScrollEvent}>
-        {daysArray.map((day) => (
-          <CalendarOneDayContainer
-            day={day.dayNumber}
-            dayOfWeek={day.dayOfWeek}
-            date={day.date}
-          />
-        ))}
+      {daysArray.map((day, i) => (
+        <CalendarOneDayContainer
+          day={day.dayNumber}
+          dayOfWeek={day.dayOfWeek}
+          date={day.date}
+          dayId={i}
+        />
+      ))}
     </div>
   );
 };

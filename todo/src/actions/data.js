@@ -12,7 +12,7 @@ export const setCurrentUserData = (currentUserData) => ({
   currentUserData,
 });
 
-export const setNewDate = (date) => ({ type: SET_NEW_DATE, newDate: date });
+export const setNewDate = (date, index) => ({ type: SET_NEW_DATE, newDate: date,  activeDayIndex: index});
 
 export const setPickedTodoInfo = (todoInfo) => ({
   type: SET_PICKED_TODO_INFO,
