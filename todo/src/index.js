@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import PrivateRoute from "./components/PrivateRoute";
+import PrivateRouteForUpdateForm from "./components/PrivateRouteForUpdateForm";
 import { ToastContainer } from "react-toastify";
 
 import { auth } from "./firebase";
@@ -35,7 +36,7 @@ auth.onAuthStateChanged((user) => {
     Firebase.database()
       .ref(`${user.uid}`)
       .on("value", (snapshot) => {
-        store.dispatch(setCurrentUserData(snapshot.val()))
+        store.dispatch(setCurrentUserData(snapshot.val()));
       });
   }
   ReactDOM.render(
@@ -47,7 +48,10 @@ auth.onAuthStateChanged((user) => {
             <Route path="/register" component={RegistrationForm}></Route>
             <Route path="/login" component={LoginForm}></Route>
             <Route path="/new" component={CreateTodoForm}></Route>
-            <Route path="/update" component={UpdateTodoForm}></Route>
+            <PrivateRouteForUpdateForm
+              path="/update"
+              component={UpdateTodoForm}
+            ></PrivateRouteForUpdateForm>
             <ToastContainer />
           </Switch>
         </Router>
