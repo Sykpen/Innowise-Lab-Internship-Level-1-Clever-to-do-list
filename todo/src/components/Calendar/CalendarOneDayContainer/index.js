@@ -9,7 +9,6 @@ const CalendarOneDayContainer = ({ day, dayOfWeek, date, dayId }) => {
   const userData = useSelector((state) => state.data.currentUserData);
 
   const activeDayIndex = useSelector((state) => state.data.activeDayIndex);
-  
 
   const [unDoneTodos, setUnDoneTodos] = useState();
   const [doneTodos, setDoneTodos] = useState();
@@ -38,7 +37,9 @@ const CalendarOneDayContainer = ({ day, dayOfWeek, date, dayId }) => {
           ? `${styles.one_day_container} ${styles.active}`
           : `${styles.one_day_container}`
       }
-      onClick={() => {dispatch(setNewDate(date, dayId))}}
+      onClick={() => {
+        dispatch(setNewDate(date, dayId));
+      }}
     >
       <p>{dayOfWeek}</p>
       <p>{day}</p>

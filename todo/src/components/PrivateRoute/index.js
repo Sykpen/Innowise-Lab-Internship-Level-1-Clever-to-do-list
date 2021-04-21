@@ -2,7 +2,9 @@ import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isUserAlreadyLoggedIn = useSelector(state => state.authorization.userId)
+  const isUserAlreadyLoggedIn = useSelector(
+    (state) => state.authorization.userId
+  );
 
   return (
     <Route

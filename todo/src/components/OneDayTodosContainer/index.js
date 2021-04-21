@@ -38,7 +38,9 @@ const OneDayTodosContainer = () => {
         <div>
           <h3>Todo</h3>
           {todoList && todoList.length > 0 ? (
-            todoList.map((oneTask) => <OneTodoContainer todoInfo={oneTask} />)
+            todoList.map((oneTask, i) => (
+              <OneTodoContainer todoInfo={oneTask} key={i} />
+            ))
           ) : (
             <div>No Todo's for today, go create one!</div>
           )}
@@ -46,8 +48,8 @@ const OneDayTodosContainer = () => {
         {doneTodos && doneTodos.length > 0 ? (
           <div>
             <h3>Completed</h3>
-            {doneTodos.map((oneTask) => (
-              <OneTodoContainer todoInfo={oneTask} />
+            {doneTodos.map((oneTask, i) => (
+              <OneTodoContainer todoInfo={oneTask} key={i} />
             ))}
           </div>
         ) : null}

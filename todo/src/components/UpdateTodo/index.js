@@ -10,8 +10,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useState } from "react";
 
-import { Firebase } from "../../firebase";
-import { Link as RouterLink } from "react-router-dom";
+import { Firebase } from "../../utils/firebase";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,12 +47,13 @@ const UpdateTodoForm = () => {
   );
   const pickedTodoDate = useSelector((state) => state.data.pickedTodoDate);
   const pickedTodoId = useSelector((state) => state.data.pickedTodoId);
-  const pickedTodoStatus = useSelector((state) => state.data.pickedTodoStatus)
+  const pickedTodoStatus = useSelector((state) => state.data.pickedTodoStatus);
 
   const [title, setTitle] = useState(pickedTodoTitle);
   const [description, setDescription] = useState(pickedTodoDescription);
   const [date, setDate] = useState(pickedTodoDate);
-  const [status, setStatus] = useState(pickedTodoStatus)
+  const [status, setStatus] = useState(pickedTodoStatus);
+  const [todoUpdateDone, setTodoUpdateDone] = useState(false);
 
   const userId = useSelector((state) => state.authorization.userId);
 
@@ -73,19 +74,17 @@ const UpdateTodoForm = () => {
     const todo = { title, description, date };
     const todoRef = Firebase.database().ref(`${userId}/${date}`);
     todoRef.child(`${pickedTodoId}`).update(todo);
-    setTitle("");
-    setDescription("");
-    setDate("");
+    setTodoUpdateDone(true);
   }
 
   const handleCheckboxChange = (e) => {
-    setStatus(!status)
+    setStatus(!status);
     const newStatus = {
       isDone: !status,
     };
     const todoRef = Firebase.database().ref(`${userId}/${pickedTodoDate}`);
     todoRef.child(`${pickedTodoId}`).update(newStatus);
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -134,10 +133,7 @@ const UpdateTodoForm = () => {
           />
           <FormControlLabel
             control={
-              <Checkbox
-              checked={status}
-              onChange={handleCheckboxChange}
-              />
+              <Checkbox checked={status} onChange={handleCheckboxChange} />
             }
             label={"Complete"}
           />
@@ -157,6 +153,7 @@ const UpdateTodoForm = () => {
           </Grid>
         </form>
       </div>
+      {todoUpdateDone ? <Redirect to="/"></Redirect> : null}
     </Container>
   );
 };

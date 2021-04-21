@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -6,12 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import { useState } from "react";
 
-import { Firebase } from "../../firebase";
-
-import { addNewTodo } from "../../actions/data";
+import { Firebase } from "../../utils/firebase";
 import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 const CreateTodoForm = () => {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
   const todayDate = useSelector((state) => state.data.currentPickedData);
 
   const [title, setTitle] = useState("");
@@ -68,7 +64,6 @@ const CreateTodoForm = () => {
     const todo = { title, description, date, isDone: false };
     const todoRef = Firebase.database().ref(`${userId}/${date}`);
     todoRef.push(todo);
-    dispatch(addNewTodo(todo));
     setTitle("");
     setDescription("");
     setDate(todayDate);

@@ -4,7 +4,8 @@ import { useState } from "react";
 import CalendarOneDayContainer from "./CalendarOneDayContainer";
 
 const Calendar = () => {
-  let [currentAndFinalDay, setCurrentAndFinalDay] = useState(moment().date());
+  const currentAndFinalDay = moment().date();
+
   let [currentMonth, setCurrentMonth] = useState(moment().month() + 1);
   let [currentYear, setCurrentYear] = useState(moment().year());
 
@@ -70,6 +71,7 @@ const Calendar = () => {
           dayOfWeek={day.dayOfWeek}
           date={day.date}
           dayId={i}
+          key={Date.now() + i}
         />
       ))}
     </div>

@@ -1,18 +1,19 @@
 import {
-  ADD_NEW_TODO,
   FETCH_DATA_FOR_CURRENT_USER,
   SET_NEW_DATE,
   SET_PICKED_TODO_INFO,
 } from "../constants";
-
-export const addNewTodo = (todo) => ({ type: ADD_NEW_TODO, todo });
 
 export const setCurrentUserData = (currentUserData) => ({
   type: FETCH_DATA_FOR_CURRENT_USER,
   currentUserData,
 });
 
-export const setNewDate = (date, index) => ({ type: SET_NEW_DATE, newDate: date,  activeDayIndex: index});
+export const setNewDate = (date, index) => ({
+  type: SET_NEW_DATE,
+  newDate: date,
+  activeDayIndex: index,
+});
 
 export const setPickedTodoInfo = (todoInfo) => ({
   type: SET_PICKED_TODO_INFO,
@@ -20,5 +21,5 @@ export const setPickedTodoInfo = (todoInfo) => ({
   description: todoInfo.description,
   date: todoInfo.date,
   id: todoInfo.key,
-  status: todoInfo.isDone
+  status: todoInfo.isDone,
 });

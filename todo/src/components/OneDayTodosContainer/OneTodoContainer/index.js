@@ -4,7 +4,7 @@ import styles from "./style.module.css";
 import { setPickedTodoInfo } from "../../../actions/data";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Firebase } from "../../../firebase";
+import { Firebase } from "../../../utils/firebase";
 
 const OneTodoContainer = ({ todoInfo }) => {
   const dispatch = useDispatch();
@@ -29,7 +29,9 @@ const OneTodoContainer = ({ todoInfo }) => {
       />
       <Link to="/update">
         <div
-          className={`${styles.one_todo} ${todoInfo.isDone ? styles.doneText : null}`}
+          className={`${styles.one_todo} ${
+            todoInfo.isDone ? styles.doneText : null
+          }`}
           onClick={() => dispatch(setPickedTodoInfo(todoInfo))}
         >
           {todoInfo.title}
