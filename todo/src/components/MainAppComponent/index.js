@@ -8,6 +8,10 @@ import { auth } from "../../utils/firebase";
 
 import { logoutUser } from "../../actions/authorization";
 import { Link } from "react-router-dom";
+import { showToast } from "../../actions/toast";
+
+import Toast from "../Toast";
+import { TOAST_LOGOUT_MESSAGE } from "../../constants";
 
 const App = () => {
   const userEmail = useSelector(
@@ -18,6 +22,7 @@ const App = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    dispatch(showToast(true, "success", TOAST_LOGOUT_MESSAGE));
     return auth.signOut();
   };
 
@@ -46,6 +51,7 @@ const App = () => {
       >
         LogOut
       </Button>
+      <Toast />
     </div>
   );
 };
