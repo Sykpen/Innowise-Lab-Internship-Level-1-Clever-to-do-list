@@ -16,7 +16,6 @@ import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import PrivateRoute from "./components/PrivateRoute";
 import PrivateRouteForUpdateForm from "./components/PrivateRouteForUpdateForm";
-import { ToastContainer } from "react-toastify";
 
 import { auth } from "./utils/firebase";
 
@@ -55,7 +54,6 @@ auth.onAuthStateChanged((user) => {
               path="/update"
               component={UpdateTodoForm}
             ></PrivateRouteForUpdateForm>
-            <ToastContainer />
           </Switch>
         </Router>
       </React.StrictMode>

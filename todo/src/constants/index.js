@@ -1,8 +1,10 @@
 export const REGISTER_USER = "REGISTER_USER";
 export const LOGIN_USER = "LOGIN_USER";
-export const REGISTER_ERROR = "REGISTER_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
-export const LOGIN_ERROR = "LOGIN_ERROR";
 export const FETCH_DATA_FOR_CURRENT_USER = "FETCH_DATA_FOR_CURRENT_USER";
 export const SET_NEW_DATE = "SET_NEW_DATE";
 export const SET_PICKED_TODO_INFO = "SET_PICKED_TODO_INFO";
+export const SHOW_TOAST = "SHOW_TOAST";
+export const TOAST_LOGIN_SUCCESS_MESSAGE = "Login was successesfull";
+export const TOAST_REGISTER_SUCCESS_MESSAGE = "Register was successesfull";
+export const TOAST_LOGOUT_MESSAGE = "Logout was successesfull";

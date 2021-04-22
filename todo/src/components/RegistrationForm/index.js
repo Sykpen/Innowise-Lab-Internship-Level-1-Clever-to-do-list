@@ -7,11 +7,13 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { register, registerError } from "../../actions/authorization";
+import { register } from "../../actions/authorization";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, Redirect } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { auth } from "../../utils/firebase";
+import { showToast } from "../../actions/toast";
+import { TOAST_REGISTER_SUCCESS_MESSAGE } from "../../constants";
+import Toast from "../Toast";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -62,14 +64,15 @@ const RegistrationForm = () => {
       );
       dispatch(register(userCreds.user.uid, userCreds.user.email));
       setuserSuccessesfullyRegistred(true);
+      dispatch(showToast(true, "success", TOAST_REGISTER_SUCCESS_MESSAGE));
     } catch (error) {
-      dispatch(registerError(error.message));
+      dispatch(showToast(true, "error", error.message));
     }
   }
 
   return (
     <Container component="main" maxWidth="xs">
-      <ToastContainer />
+      <Toast />
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
