@@ -1,0 +1,26 @@
+.one_todo {
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo_main a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.todo_main {
+  display: flex;
+  margin-top: 20px;
+  max-width: 500px;
+  align-items: flex-end;
+}
+
+.doneText {
+  text-decoration: line-through;
+}

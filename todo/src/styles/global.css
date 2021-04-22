@@ -1,0 +1,19 @@
+body {
+  background-color: var(--mainColor) !important;
+}
+
+div p {
+  color: var(--secondaryColor);
+}
+
+div {
+  color: var(--secondaryColor);
+}
+
+a {
+  color: var(--secondaryColor);
+}
+
+.MuiInputBase-input {
+  color: var(--secondaryColor) !important;
+}

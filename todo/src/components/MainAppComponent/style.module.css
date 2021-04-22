@@ -1,0 +1,38 @@
+.main_container {
+  max-width: 752px;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px;
+}
+
+.create_new {
+  margin-top: 20px !important;
+}
+
+.logout {
+  position: absolute !important;
+  top: 5px;
+  right: 10px;
+}
+
+.main_container a {
+  text-decoration: none;
+}
+
+.welcome_user_text_container {
+  white-space: nowrap;
+  width: 100%;
+  max-width: 350px;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+@media (max-width: 500px) {
+  .welcome_user_text_container {
+    max-width: 230px;
+  }
+}
