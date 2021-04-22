@@ -4,7 +4,11 @@
 
 https://docs.google.com/document/d/1heFuihWrsw14bCpUdr6fla9ysqE6IrsobSMKAOpBiKA/edit
 
-## 2. How to run the app
+## 2. Demo
+
+https://clever-todo-potapov-sergey.netlify.app
+
+## 3. How to run the app
 
 ### 1. Connect to Firebase
 
@@ -18,19 +22,19 @@ https://docs.google.com/document/d/1heFuihWrsw14bCpUdr6fla9ysqE6IrsobSMKAOpBiKA/
 
 #### `yarn build` or `npm run build`
 
-## 3. Database snapshot
+## 4. Database snapshot
 
 | Database |       |          |              |                              |
 | -------- | ----- | -------- | ------------ | ---------------------------- |
 | User ID: | &not; |          |              |                              |
 |          | Date: | &not;    |              |                              |
 |          |       | Task ID: | &not;        |                              |
-|          |       |          | date:        | `string`: '2021-04-21'       |
+|          |       |          | date:        | `string`: '2021-04-22'       |
 |          |       |          | description: | `string`: 'Test description' |
 |          |       |          | isDone:      | `boolen`: `true` or `false`  |
 |          |       |          | title:       | `string`: 'Test title'       |
 
-## 4. Application stack
+## 5. Application stack
 
 1. React
 2. Redux
@@ -39,15 +43,11 @@ https://docs.google.com/document/d/1heFuihWrsw14bCpUdr6fla9ysqE6IrsobSMKAOpBiKA/
 5. Moment.js
 6. Material UI
 
-## 5. Folders
+## 6. Folders
 
-- Actions - js files for action creators
+- Actions - js files for actions
 - Components - folder for all app components
 - Constants - file with app constants
 - Reducers - folder with reducers and rootReducer
-- Styles - folder with css files
+- Styles - folder with global css files
 - Utils - fierbase setup file
-
-## 6. Demo
-
-
