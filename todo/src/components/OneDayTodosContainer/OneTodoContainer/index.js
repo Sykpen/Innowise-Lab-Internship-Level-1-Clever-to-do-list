@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
@@ -41,4 +42,4 @@ const OneTodoContainer = ({ todoInfo }) => {
   );
 };
 
-export default OneTodoContainer;
+export default React.memo(OneTodoContainer);

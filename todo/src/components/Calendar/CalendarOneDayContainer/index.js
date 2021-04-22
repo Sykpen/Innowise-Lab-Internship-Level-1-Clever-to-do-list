@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setNewDate } from "../../../actions/data";
 import styles from "./style.module.css";
@@ -55,4 +55,4 @@ const CalendarOneDayContainer = ({ day, dayOfWeek, date, dayId }) => {
   );
 };
 
-export default CalendarOneDayContainer;
+export default React.memo(CalendarOneDayContainer);
