@@ -9,10 +9,10 @@ import Container from "@material-ui/core/Container";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../actions/authorization";
-import { auth } from "../../utils/firebase";
 import Toast from "../Toast";
 import { showToast } from "../../actions/toast";
 import { TOAST_LOGIN_SUCCESS_MESSAGE } from "../../constants";
+import {firebaseLoginUser } from "../../utils/firebaseHelper"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,7 +54,7 @@ export default function LoginForm() {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-      const userCreads = await auth.signInWithEmailAndPassword(email, password);
+      const userCreads = await firebaseLoginUser(email, password);
       dispatch(loginUser(userCreads.user.uid, userCreads.user.email));
       setIsLoginSuccesessfull(true);
       dispatch(showToast(true, "success", TOAST_LOGIN_SUCCESS_MESSAGE));

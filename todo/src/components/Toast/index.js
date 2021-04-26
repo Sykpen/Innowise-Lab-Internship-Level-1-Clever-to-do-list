@@ -25,10 +25,10 @@ const Toast = () => {
     <Snackbar
       open={showToastToUser}
       autoHideDuration={2000}
-      onClose={() => handleClose()}
+      onClose={handleClose}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
-      <Alert onClose={() => handleClose()} severity={toastType}>
+      <Alert onClose={handleClose} severity={toastType}>
         {toastText}
       </Alert>
     </Snackbar>

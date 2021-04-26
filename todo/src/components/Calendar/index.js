@@ -9,7 +9,7 @@ const Calendar = () => {
   let [currentMonth, setCurrentMonth] = useState(moment().month() + 1);
   let [currentYear, setCurrentYear] = useState(moment().year());
 
-  const fulfillArrayOfDAys = (arr, newMonth, year) => {
+  const fulfillArrayOfDays = (arr, newMonth, year) => {
     let i = currentAndFinalDay;
     for (i; i <= moment().daysInMonth(); i++) {
       arr.push({
@@ -33,7 +33,7 @@ const Calendar = () => {
   };
 
   let [daysArray, setDaysArray] = useState(
-    fulfillArrayOfDAys([], currentMonth, currentYear)
+    fulfillArrayOfDays([], currentMonth, currentYear)
   );
 
   const handleScrollEvent = (e) => {
@@ -45,7 +45,7 @@ const Calendar = () => {
       if (currentMonth + 1 > 12) {
         setCurrentMonth(1);
         setCurrentYear(currentYear + 1);
-        const updatedArray = fulfillArrayOfDAys(
+        const updatedArray = fulfillArrayOfDays(
           nextMonthArr,
           1,
           currentYear + 1
@@ -53,7 +53,7 @@ const Calendar = () => {
         setDaysArray([...daysArray, ...updatedArray]);
       } else {
         setCurrentMonth(currentMonth + 1);
-        const updatedArray = fulfillArrayOfDAys(
+        const updatedArray = fulfillArrayOfDays(
           nextMonthArr,
           currentMonth + 1,
           currentYear
