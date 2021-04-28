@@ -4,8 +4,8 @@ import Button from "@material-ui/core/Button";
 import OneDayTodosContainer from "../OneDayTodosContainer";
 import Calendar from "../Calendar";
 import { useDispatch, useSelector } from "react-redux";
-import {firebaceLogoutUser} from '../../utils/firebaseHelper'
- 
+import { firebaceLogoutUser } from "../../utils/firebaseHelper";
+
 import { logoutUser } from "../../actions/authorization";
 import { Link } from "react-router-dom";
 import { showToast } from "../../actions/toast";

@@ -2,7 +2,13 @@ import styles from "./style.module.css";
 import { useSelector } from "react-redux";
 
 import OneTodoContainer from "./OneTodoContainer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+const mapTodos = (todosArray) => {
+  return todosArray.map((oneTask) => (
+    <OneTodoContainer todoInfo={oneTask} key={oneTask.key} />
+  ));
+};
 
 const OneDayTodosContainer = () => {
   const [todoList, setTodoList] = useState();
@@ -38,9 +44,7 @@ const OneDayTodosContainer = () => {
         <div>
           <h3>Todo</h3>
           {todoList && todoList.length > 0 ? (
-            todoList.map((oneTask) => (
-              <OneTodoContainer todoInfo={oneTask} key={oneTask.key} />
-            ))
+            mapTodos(todoList)
           ) : (
             <div>No Todo's for today, go create one!</div>
           )}
@@ -48,9 +52,7 @@ const OneDayTodosContainer = () => {
         {doneTodos && doneTodos.length > 0 ? (
           <div>
             <h3>Completed</h3>
-            {doneTodos.map((oneTask) => (
-              <OneTodoContainer todoInfo={oneTask} key={oneTask.key} />
-            ))}
+            {mapTodos(doneTodos)}
           </div>
         ) : null}
       </div>

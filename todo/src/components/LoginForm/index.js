@@ -12,7 +12,7 @@ import { loginUser } from "../../actions/authorization";
 import Toast from "../Toast";
 import { showToast } from "../../actions/toast";
 import { TOAST_LOGIN_SUCCESS_MESSAGE } from "../../constants";
-import {firebaseLoginUser } from "../../utils/firebaseHelper"
+import { firebaseLoginUser } from "../../utils/firebaseHelper";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

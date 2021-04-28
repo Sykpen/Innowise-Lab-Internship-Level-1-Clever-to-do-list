@@ -13,7 +13,7 @@ import { Link as RouterLink, Redirect } from "react-router-dom";
 import { showToast } from "../../actions/toast";
 import { TOAST_REGISTER_SUCCESS_MESSAGE } from "../../constants";
 import Toast from "../Toast";
-import {firebaseCreateNewUser} from '../../utils/firebaseHelper'
+import { firebaseCreateNewUser } from "../../utils/firebaseHelper";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -58,7 +58,7 @@ const RegistrationForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-      const userCreds = await firebaseCreateNewUser(email, password)
+      const userCreds = await firebaseCreateNewUser(email, password);
       dispatch(register(userCreds.user.uid, userCreds.user.email));
       setuserSuccessesfullyRegistred(true);
       dispatch(showToast(true, "success", TOAST_REGISTER_SUCCESS_MESSAGE));

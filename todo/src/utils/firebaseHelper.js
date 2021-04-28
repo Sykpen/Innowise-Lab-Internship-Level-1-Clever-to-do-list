@@ -16,7 +16,7 @@ export const firebaseUpdateUser = (updatedData, userId, date, todoId) => {
 };
 
 export const firebaceLogoutUser = () => {
-    return auth.signOut();
+  return auth.signOut();
 };
 
 export const firebaseCreateTodo = (todoData, userId, date) => {

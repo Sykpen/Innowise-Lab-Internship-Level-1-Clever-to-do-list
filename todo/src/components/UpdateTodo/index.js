@@ -12,7 +12,7 @@ import { useState } from "react";
 
 import { Link as RouterLink, Redirect } from "react-router-dom";
 
-import {firebaseUpdateUser} from '../../utils/firebaseHelper'
+import { firebaseUpdateUser } from "../../utils/firebaseHelper";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,7 +73,7 @@ const UpdateTodoForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     const todo = { title, description, date };
-    firebaseUpdateUser(todo, userId, date, pickedTodoId)
+    firebaseUpdateUser(todo, userId, date, pickedTodoId);
     setTodoUpdateDone(true);
   }
 
@@ -82,7 +82,7 @@ const UpdateTodoForm = () => {
     const newStatus = {
       isDone: !status,
     };
-    firebaseUpdateUser(newStatus, userId, date, pickedTodoId)
+    firebaseUpdateUser(newStatus, userId, date, pickedTodoId);
   };
 
   return (
