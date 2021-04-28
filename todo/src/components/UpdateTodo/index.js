@@ -10,8 +10,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useState } from "react";
 
-import { Firebase } from "../../utils/firebase";
 import { Link as RouterLink, Redirect } from "react-router-dom";
+
+import { firebaseUpdateUser } from "../../utils/firebaseHelper";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -72,8 +73,7 @@ const UpdateTodoForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     const todo = { title, description, date };
-    const todoRef = Firebase.database().ref(`${userId}/${date}`);
-    todoRef.child(`${pickedTodoId}`).update(todo);
+    firebaseUpdateUser(todo, userId, date, pickedTodoId);
     setTodoUpdateDone(true);
   }
 
@@ -82,8 +82,7 @@ const UpdateTodoForm = () => {
     const newStatus = {
       isDone: !status,
     };
-    const todoRef = Firebase.database().ref(`${userId}/${pickedTodoDate}`);
-    todoRef.child(`${pickedTodoId}`).update(newStatus);
+    firebaseUpdateUser(newStatus, userId, date, pickedTodoId);
   };
 
   return (

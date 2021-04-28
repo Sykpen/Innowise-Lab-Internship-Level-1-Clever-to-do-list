@@ -3,37 +3,36 @@ import moment from "moment";
 import { useState } from "react";
 import CalendarOneDayContainer from "./CalendarOneDayContainer";
 
+const fulfillArrayOfDays = (arr, newMonth, year) => {
+  let i = moment().date();
+  for (i; i <= moment().daysInMonth(); i++) {
+    arr.push({
+      dayNumber: i,
+      month: newMonth,
+      dayOfWeek: moment(`${year}-${newMonth}-${i}`).format("dddd"),
+      date: moment(`${year}-${newMonth}-${i}`).format("YYYY-MM-DD"),
+    });
+    if (i === moment().daysInMonth()) {
+      for (let i = 1; i <= moment().date(); i++) {
+        arr.push({
+          dayNumber: i,
+          month: newMonth + 1,
+          dayOfWeek: moment(`${year}-${newMonth}-${i}`).format("dddd"),
+          date: moment(`${year}-${newMonth + 1}-${i}`).format("YYYY-MM-DD"),
+        });
+      }
+    }
+  }
+  return arr;
+};
+
 const Calendar = () => {
-  const currentAndFinalDay = moment().date();
 
   let [currentMonth, setCurrentMonth] = useState(moment().month() + 1);
   let [currentYear, setCurrentYear] = useState(moment().year());
 
-  const fulfillArrayOfDAys = (arr, newMonth, year) => {
-    let i = currentAndFinalDay;
-    for (i; i <= moment().daysInMonth(); i++) {
-      arr.push({
-        dayNumber: i,
-        month: newMonth,
-        dayOfWeek: moment(`${year}-${newMonth}-${i}`).format("dddd"),
-        date: moment(`${year}-${newMonth}-${i}`).format("YYYY-MM-DD"),
-      });
-      if (i === moment().daysInMonth()) {
-        for (let i = 1; i <= moment().date(); i++) {
-          arr.push({
-            dayNumber: i,
-            month: newMonth + 1,
-            dayOfWeek: moment(`${year}-${newMonth}-${i}`).format("dddd"),
-            date: moment(`${year}-${newMonth + 1}-${i}`).format("YYYY-MM-DD"),
-          });
-        }
-      }
-    }
-    return arr;
-  };
-
   let [daysArray, setDaysArray] = useState(
-    fulfillArrayOfDAys([], currentMonth, currentYear)
+    fulfillArrayOfDays([], currentMonth, currentYear)
   );
 
   const handleScrollEvent = (e) => {
@@ -45,7 +44,7 @@ const Calendar = () => {
       if (currentMonth + 1 > 12) {
         setCurrentMonth(1);
         setCurrentYear(currentYear + 1);
-        const updatedArray = fulfillArrayOfDAys(
+        const updatedArray = fulfillArrayOfDays(
           nextMonthArr,
           1,
           currentYear + 1
@@ -53,7 +52,7 @@ const Calendar = () => {
         setDaysArray([...daysArray, ...updatedArray]);
       } else {
         setCurrentMonth(currentMonth + 1);
-        const updatedArray = fulfillArrayOfDAys(
+        const updatedArray = fulfillArrayOfDays(
           nextMonthArr,
           currentMonth + 1,
           currentYear

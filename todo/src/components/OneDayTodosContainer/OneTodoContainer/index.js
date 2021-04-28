@@ -5,7 +5,7 @@ import styles from "./style.module.css";
 import { setPickedTodoInfo } from "../../../actions/data";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Firebase } from "../../../utils/firebase";
+import { firebaseUpdateUser } from "../../../utils/firebaseHelper";
 
 const OneTodoContainer = ({ todoInfo }) => {
   const dispatch = useDispatch();
@@ -17,8 +17,7 @@ const OneTodoContainer = ({ todoInfo }) => {
     const newStatus = {
       isDone: !todoInfo.isDone,
     };
-    const todoRef = Firebase.database().ref(`${userId}/${todoInfo.date}`);
-    todoRef.child(`${todoInfo.key}`).update(newStatus);
+    firebaseUpdateUser(newStatus, userId, todoInfo.date, todoInfo.key);
   };
 
   return (

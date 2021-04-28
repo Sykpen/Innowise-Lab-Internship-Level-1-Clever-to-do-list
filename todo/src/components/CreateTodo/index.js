@@ -8,7 +8,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
 
-import { Firebase } from "../../utils/firebase";
+import { firebaseCreateTodo } from "../../utils/firebaseHelper";
 import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,8 +62,7 @@ const CreateTodoForm = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     const todo = { title, description, date, isDone: false };
-    const todoRef = Firebase.database().ref(`${userId}/${date}`);
-    todoRef.push(todo);
+    firebaseCreateTodo(todo, userId, date);
     setTitle("");
     setDescription("");
     setDate(todayDate);
